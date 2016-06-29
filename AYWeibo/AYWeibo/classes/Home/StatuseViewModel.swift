@@ -68,11 +68,9 @@ class StatuseViewModel: NSObject {
         }
         
         // 3.处理会员图标
-        QL2(statuse.user?.mbrank)
         if statuse.user?.mbrank >= 1 && statuse.user?.mbrank <= 6 {
             user_vip_image = UIImage(named: "common_icon_membership_level\(statuse.user!.mbrank)")
         } else if statuse.user?.mbrank == 0 {
-            QL2("")
             user_vip_image = UIImage(named: "common_icon_membership")
         }
         
