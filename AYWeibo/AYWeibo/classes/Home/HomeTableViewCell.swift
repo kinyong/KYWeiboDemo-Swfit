@@ -67,11 +67,15 @@ class HomeTableViewCell: UITableViewCell {
     
     // MARK: - 内部控制方法
     
+//    /// 计算cell的高度和collectionview的尺寸
+//    private func calculateSize() -> (CGSize, CGSize) {
+//        
+//    }
+    
     private func setupSubViews() {
         iconImageView.layer.cornerRadius = 25.0
         iconImageView.layer.borderWidth = 1.0
         iconImageView.layer.borderColor = UIColor.grayColor().CGColor
         iconImageView.clipsToBounds = true
     }
-    
 }

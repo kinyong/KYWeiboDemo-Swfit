@@ -24,6 +24,8 @@ class StatuseModel: NSObject {
     /// 微博作者的用户信息
     var user: UserModel?
     
+    /// 缩略图片地址，没有时不返回此字段
+    var pic_urls: [[String: AnyObject]]?
 
 
     init(dict: [String: AnyObject]) {
@@ -45,7 +47,7 @@ class StatuseModel: NSObject {
     }
     
     override var description: String {
-        let keys = ["created_at", "idstr", "text", "source", "user"]
+        let keys = ["created_at", "idstr", "text", "source", "user", "thumbnail_pic"]
         let dict = dictionaryWithValuesForKeys(keys)
         
         return "\(dict)"

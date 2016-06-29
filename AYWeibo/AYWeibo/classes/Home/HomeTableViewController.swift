@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 private let reuseIdentifier = "HomeCell"
 
@@ -76,8 +77,6 @@ class HomeTableViewController: BaseViewController {
         return cell
     }
     
-    // MARK: tableViewDelegate
-    
     // MARK: - 内部控制方法
     
     // 加载当前登录用户及其所关注（授权）用户的最新微博
@@ -106,12 +105,44 @@ class HomeTableViewController: BaseViewController {
                     models.append(StatuseViewModel(statuse: statuse))
                 }
                 
-                self.statuses = models
-                
+                // 3.1 缓存图片
+                self.cacheImage(models)
+            
             } catch {
                 QL2("json解析失败")
             }
         }
+    }
+    
+//     3.1 缓存图片方法实现
+    private func cacheImage(viewModels: [StatuseViewModel]) {
+        // 0.创建一个队列组
+        let group = dispatch_group_create()
+
+        for viewModel in viewModels {
+            
+            // 1.从模型数据中取出配图数组
+            guard let urls = viewModel.thumbnail_urls else {
+                continue
+            }
+            
+            // 2.遍历配图数组利用SDWebImage下载图片
+            for url in urls {
+                dispatch_group_enter(group)
+                
+                SDWebImageManager.sharedManager().downloadImageWithURL(url, options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, _, _, _) in
+                    dispatch_group_leave(group)
+
+                })
+
+            }
+        }
+        // 3.2 存储模型 - 监听缓存图片下载完成
+        dispatch_group_notify(group, dispatch_get_main_queue(), {
+            self.statuses = viewModels
+        })
+        
+        
     }
     
     // 接收到通知后的实现方法

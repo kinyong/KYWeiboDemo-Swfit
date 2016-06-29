@@ -41,6 +41,9 @@ class StatuseViewModel: NSObject {
     /// 正文
     var content_text: String?
     
+    /// 缩略图片地址
+    var thumbnail_urls: [NSURL?]?
+    
     init(statuse: StatuseModel) {
         self.statuse = statuse
         
@@ -104,5 +107,21 @@ class StatuseViewModel: NSObject {
         
         // 7.处理正文
         content_text = statuse.text
+        
+        // 8 处理缩略图RUL
+        if let pic_url = statuse.pic_urls {
+            thumbnail_urls = [NSURL]()
+            
+            // 1. 从模型中取出配图数据
+            for dict in pic_url {
+                guard let urlStr = dict["thumbnail_pic"] as? String else {
+                    continue
+                }
+                
+                // 2.2 根据字符串创建URL
+                let url = NSURL(string: urlStr)
+                thumbnail_urls?.append(url)
+            }
+        }
     }
 }
