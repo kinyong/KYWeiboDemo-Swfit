@@ -51,6 +51,9 @@ class HomeTableViewController: BaseViewController {
         
         // 5.创建cell并注册标示符
         self.tableView.registerNib(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+        self.tableView.estimatedRowHeight = 400
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.separatorStyle = .None
     }
     
     deinit {
@@ -74,10 +77,6 @@ class HomeTableViewController: BaseViewController {
     }
     
     // MARK: tableViewDelegate
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 200.0
-    }
     
     // MARK: - 内部控制方法
     
