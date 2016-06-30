@@ -24,11 +24,14 @@ class HomeTableViewController: BaseViewController {
     }()
     
     /// 保存所有微博数据
-    var statuses: [StatuseViewModel]? {
+    private var statuses: [StatuseViewModel]? {
         didSet {
             self.tableView.reloadData()
         }
     }
+    
+    /// 缓存cell的行高
+    private var rowHeightCache = [String: CGFloat]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,12 +56,17 @@ class HomeTableViewController: BaseViewController {
         // 5.创建cell并注册标示符
         self.tableView.registerNib(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
         self.tableView.separatorStyle = .None
-        self.tableView.rowHeight = 400
     }
     
     deinit {
         // 移除通知
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // 释放缓存数据
+        rowHeightCache.removeAll()
     }
     
     // MARK: tableViewDataSurce
@@ -74,6 +82,33 @@ class HomeTableViewController: BaseViewController {
         cell.viewModel = statuses?[indexPath.row]
         // 3.返回cell
         return cell
+    }
+    
+    // MARK: - tableviewDelegate
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let viewModel = statuses![indexPath.row]
+        
+        // 1.如果缓存中有值
+        guard let height = rowHeightCache[viewModel.statuse.idstr ?? "-1"] else {
+            QL3("")
+            // 2.如果缓存中没有值
+            // 2.1 获取当前显示的cell
+            let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as! HomeTableViewCell
+            // 2.2 计算行高
+            let rowHeigth = cell.calculateRowHeight(statuses![indexPath.row])
+            // 2.3 缓存行高
+            rowHeightCache[viewModel.statuse.idstr ?? "-1"] = rowHeigth
+            // 2.4 返回行高
+            return rowHeigth
+        }
+        
+        // 1.1 返回缓存中的行高
+        return height
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 1000
     }
     
     // MARK: - 内部控制方法

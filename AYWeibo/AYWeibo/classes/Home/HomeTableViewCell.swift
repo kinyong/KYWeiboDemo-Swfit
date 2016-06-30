@@ -32,6 +32,8 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet var picWidthConstraint: NSLayoutConstraint!
     /// 配图视图的高度约束
     @IBOutlet var picHeightConstraint: NSLayoutConstraint!
+    /// 底部视图
+    @IBOutlet var footerView: UIView!
     /// 模型数据
     var viewModel: StatuseViewModel? {
         didSet {
@@ -85,10 +87,14 @@ class HomeTableViewCell: UITableViewCell {
     
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    // MARK: - 外部控制方法
+    func calculateRowHeight(viewModel:StatuseViewModel) -> CGFloat {
+        // 1.设置数据
+        self.viewModel = viewModel
+        // 2.强制更新UI
+        self.layoutIfNeeded()
+        // 3.返回底部视图最大Y
+        return CGRectGetMaxY(footerView.frame)
     }
     
     // MARK: - 内部控制方法
@@ -153,5 +159,6 @@ class HomeTableViewCell: UITableViewCell {
         iconImageView.layer.borderWidth = 1.0
         iconImageView.layer.borderColor = UIColor.grayColor().CGColor
         iconImageView.clipsToBounds = true
+        contentLabel.preferredMaxLayoutWidth = UIScreen.mainScreen().bounds.width - 2 * 10
     }
 }
