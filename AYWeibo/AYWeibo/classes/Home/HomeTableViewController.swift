@@ -52,9 +52,8 @@ class HomeTableViewController: BaseViewController {
         
         // 5.创建cell并注册标示符
         self.tableView.registerNib(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
-        self.tableView.estimatedRowHeight = 400
-        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.separatorStyle = .None
+        self.tableView.rowHeight = 400
     }
     
     deinit {

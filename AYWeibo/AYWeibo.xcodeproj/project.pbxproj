@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		45C9503927702273DE26EE20 /* Pods_AYWeibo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA538AAE5F6A62028BC66BAA /* Pods_AYWeibo.framework */; };
+		488566DF1D24FC4800E6AFC8 /* CollectionViewInHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488566DE1D24FC4800E6AFC8 /* CollectionViewInHome.swift */; };
+		488566E11D256DCC00E6AFC8 /* CollectionViewCellInHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488566E01D256DCC00E6AFC8 /* CollectionViewCellInHome.swift */; };
 		DD5251531D1BCA5600B6CAF6 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5251521D1BCA5600B6CAF6 /* UserModel.swift */; };
 		DD5251561D1BE48400B6CAF6 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5251541D1BE48400B6CAF6 /* HomeTableViewCell.swift */; };
 		DD5251571D1BE48400B6CAF6 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD5251551D1BE48400B6CAF6 /* HomeTableViewCell.xib */; };
@@ -71,6 +73,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		488566DE1D24FC4800E6AFC8 /* CollectionViewInHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewInHome.swift; sourceTree = "<group>"; };
+		488566E01D256DCC00E6AFC8 /* CollectionViewCellInHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCellInHome.swift; sourceTree = "<group>"; };
 		BFD7938325764509CF28D412 /* Pods-AYWeibo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AYWeibo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AYWeibo/Pods-AYWeibo.debug.xcconfig"; sourceTree = "<group>"; };
 		DD5251521D1BCA5600B6CAF6 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		DD5251541D1BE48400B6CAF6 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -205,11 +209,13 @@
 				DDD291091D0ADDBE003C31AA /* QRCord */,
 				DDD290C01D06B868003C31AA /* Popover */,
 				DD677FCA1CED65CD004F0A4C /* HomeTableViewController.swift */,
+				DD5251541D1BE48400B6CAF6 /* HomeTableViewCell.swift */,
+				DD5251551D1BE48400B6CAF6 /* HomeTableViewCell.xib */,
+				488566DE1D24FC4800E6AFC8 /* CollectionViewInHome.swift */,
+				488566E01D256DCC00E6AFC8 /* CollectionViewCellInHome.swift */,
 				DDC779A61D1BB7DB00E55809 /* StatuseModel.swift */,
 				DD5251521D1BCA5600B6CAF6 /* UserModel.swift */,
 				DD52515F1D1DB4A500B6CAF6 /* StatuseViewModel.swift */,
-				DD5251541D1BE48400B6CAF6 /* HomeTableViewCell.swift */,
-				DD5251551D1BE48400B6CAF6 /* HomeTableViewCell.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -563,12 +569,14 @@
 				DD5251591D1D1CD900B6CAF6 /* NSDate+Extension.swift in Sources */,
 				DD7A624B1D1A99AA009427C1 /* AYNewfeatureLayout.swift in Sources */,
 				DDD6F5FC1D19283F009ED1B0 /* String+Extension.swift in Sources */,
+				488566DF1D24FC4800E6AFC8 /* CollectionViewInHome.swift in Sources */,
 				DDD6F5FA1D18C5D5009ED1B0 /* UserAccount.swift in Sources */,
 				DDD291151D0B44D9003C31AA /* AYMacroMethod.swift in Sources */,
 				DD699C951CEBADEE00E4704D /* AppDelegate.swift in Sources */,
 				DD677FCD1CED65EA004F0A4C /* DiscoverTableViewController.swift in Sources */,
 				DDB1ADC51D02D1A700AD1966 /* BaseViewController.swift in Sources */,
 				DDBDE9F71CFD813A00048845 /* NullViewController.swift in Sources */,
+				488566E11D256DCC00E6AFC8 /* CollectionViewCellInHome.swift in Sources */,
 				DDD290BB1D042CA1003C31AA /* UIBarButtonItem+Extension.swift in Sources */,
 				DDB1ADC71D02D9D200AD1966 /* VisitorView.swift in Sources */,
 				DD677FCF1CED6615004F0A4C /* MessageTableViewController.swift in Sources */,

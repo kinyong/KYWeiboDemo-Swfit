@@ -24,7 +24,14 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet var sourceLabel: UILabel!
     /// 正文
     @IBOutlet var contentLabel: UILabel!
-    
+    /// 配图视图
+    @IBOutlet var picCollectionView: CollectionViewInHome!
+    /// 配置视图布局
+    @IBOutlet var picLayout: UICollectionViewFlowLayout!
+    /// 配图视图宽度约束
+    @IBOutlet var picWidthConstraint: NSLayoutConstraint!
+    /// 配图视图的高度约束
+    @IBOutlet var picHeightConstraint: NSLayoutConstraint!
     /// 模型数据
     var viewModel: StatuseViewModel? {
         didSet {
@@ -50,16 +57,32 @@ class HomeTableViewCell: UITableViewCell {
             
             // 7.设置正文
             contentLabel.text = viewModel?.content_text
-            QL2(viewModel?.user_name_text)
-            QL2(viewModel?.thumbnail_urls?.count)
-            QL2(calculateSize())
+            
+            // 8. 每次拿到数据后刷新配图视图
+            picCollectionView.reloadData()
+            
+            // 8.1 将thumbnail_urls传递给picCollectionView
+            picCollectionView.thumbnail_urls = viewModel?.thumbnail_urls
+            let (itemSize, collectionViewSize) = calculateSize()
+            
+            // 8.2 更新item尺寸
+            if itemSize != CGSizeZero {
+                picLayout.itemSize = itemSize
+                
+            }
+            
+            // 8.3 更新配图视图的尺寸
+            picWidthConstraint.constant = collectionViewSize.width
+            picHeightConstraint.constant = collectionViewSize.height
         }
     }
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         setupSubViews()
+    
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -70,16 +93,21 @@ class HomeTableViewCell: UITableViewCell {
     
     // MARK: - 内部控制方法
     
-    /// 计算cell的高度和collectionview的尺寸
+    /// 计算item的尺寸和collectionview的尺寸
     /*
      图片的排列有三种：
      1张图片：图片默认宽高
      4张图片：固定宽高 90*90
      多张图片：固定宽高 90*90
     */
-    private func calculateSize() -> (cellSize: CGSize, collectionSize: CGSize) {
+    private func calculateSize() -> (itemSize: CGSize, collectionSize: CGSize) {
         // 0. 获取单个viewModel的urls数量，如果没有，就返回0
         let count = viewModel?.thumbnail_urls?.count ?? 0
+        
+        // 没有配图
+        if count == 0 {
+            return (CGSizeZero, CGSizeZero)
+        }
         
         // 1. 1张图片
         if count == 1 {
@@ -114,8 +142,8 @@ class HomeTableViewCell: UITableViewCell {
         let width = CGFloat(col) * w + CGFloat(col - 1) * m
         // 高度：行数 * 图片宽度 + （行数 - 1）* 间隙
         let height = CGFloat(row) * h + CGFloat(row - 1) * m
-        let cellsSize = CGSize(width: width, height: height)
-        let collectionSize = CGSize(width: w, height: h)
+        let cellsSize = CGSize(width: w, height: h)
+        let collectionSize = CGSize(width: width, height: height)
         
         return (cellsSize, collectionSize)
     }

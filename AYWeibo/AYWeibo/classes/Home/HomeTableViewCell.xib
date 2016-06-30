@@ -7,11 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="159" id="KGk-i7-Jjw" customClass="HomeTableViewCell" customModule="新浪微博" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="477" height="159"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="236" id="KGk-i7-Jjw" customClass="HomeTableViewCell" customModule="新浪微博" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="477" height="236"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="477" height="158.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="477" height="235.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pot-Vt-JTo" userLabel="头像">
@@ -54,13 +54,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7N-Oj-nPB" userLabel="正文">
-                        <rect key="frame" x="10" y="70" width="457" height="24"/>
+                        <rect key="frame" x="10" y="70" width="457" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PYX-NS-25H">
-                        <rect key="frame" x="0.0" y="114" width="477" height="44"/>
+                        <rect key="frame" x="0.0" y="150" width="477" height="44"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tuW-OO-90F">
                                 <rect key="frame" x="0.0" y="0.0" width="159" height="44"/>
@@ -97,7 +97,7 @@
                                 </constraints>
                             </view>
                             <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2E-no-KcI">
-                                <rect key="frame" x="318" y="0.5" width="1" height="44"/>
+                                <rect key="frame" x="318" y="0.0" width="1" height="44"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="1" id="1yC-Nc-KNZ"/>
@@ -128,15 +128,31 @@
                             <constraint firstItem="k2E-no-KcI" firstAttribute="top" secondItem="PYX-NS-25H" secondAttribute="top" id="z2M-z5-yXy"/>
                         </constraints>
                     </view>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="prZ-z7-fUD" customClass="CollectionViewInHome" customModule="新浪微博" customModuleProvider="target">
+                        <rect key="frame" x="10" y="100.5" width="256" height="40"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="r62-Mr-B4P"/>
+                            <constraint firstAttribute="width" constant="256" id="wln-eU-5m8"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="L4n-mt-RFN">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="prZ-z7-fUD" firstAttribute="leading" secondItem="M7N-Oj-nPB" secondAttribute="leading" id="1DX-MI-bKm"/>
                     <constraint firstItem="fUf-hS-1Bg" firstAttribute="leading" secondItem="Pot-Vt-JTo" secondAttribute="trailing" constant="8" id="2zQ-TX-R0X"/>
                     <constraint firstItem="kBl-oK-a9x" firstAttribute="leading" secondItem="fUf-hS-1Bg" secondAttribute="trailing" constant="10" id="9Eb-MN-TkO"/>
-                    <constraint firstAttribute="bottom" secondItem="PYX-NS-25H" secondAttribute="bottom" id="EgW-ow-jdc"/>
                     <constraint firstItem="Pot-Vt-JTo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Flj-CA-ovS"/>
+                    <constraint firstItem="prZ-z7-fUD" firstAttribute="top" secondItem="M7N-Oj-nPB" secondAttribute="bottom" constant="10" id="GAU-vD-bkx"/>
                     <constraint firstItem="Pot-Vt-JTo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="GHC-Pa-iJB"/>
                     <constraint firstItem="fUf-hS-1Bg" firstAttribute="bottom" secondItem="Pot-Vt-JTo" secondAttribute="bottom" constant="-5" id="IpV-of-8Ae"/>
                     <constraint firstItem="PYX-NS-25H" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Mw4-0n-fH4"/>
+                    <constraint firstItem="PYX-NS-25H" firstAttribute="top" secondItem="prZ-z7-fUD" secondAttribute="bottom" constant="10" id="PbA-jO-tWU"/>
                     <constraint firstItem="say-2S-cdQ" firstAttribute="leading" secondItem="Pot-Vt-JTo" secondAttribute="trailing" constant="8" id="RSo-LJ-NXY"/>
                     <constraint firstItem="wKn-Nm-qtt" firstAttribute="leading" secondItem="say-2S-cdQ" secondAttribute="trailing" constant="8" id="SiJ-LG-KCr"/>
                     <constraint firstItem="wKn-Nm-qtt" firstAttribute="centerY" secondItem="say-2S-cdQ" secondAttribute="centerY" id="bf2-6t-3Is"/>
@@ -147,7 +163,6 @@
                     <constraint firstItem="X6a-xZ-cAG" firstAttribute="trailing" secondItem="Pot-Vt-JTo" secondAttribute="trailing" id="lO9-8V-3z7"/>
                     <constraint firstItem="M7N-Oj-nPB" firstAttribute="top" secondItem="Pot-Vt-JTo" secondAttribute="bottom" constant="10" id="pc0-6g-xvs"/>
                     <constraint firstItem="X6a-xZ-cAG" firstAttribute="bottom" secondItem="Pot-Vt-JTo" secondAttribute="bottom" id="qHh-qa-9vM"/>
-                    <constraint firstItem="PYX-NS-25H" firstAttribute="top" secondItem="M7N-Oj-nPB" secondAttribute="bottom" constant="20" id="sVs-CB-kq8"/>
                     <constraint firstAttribute="trailing" secondItem="M7N-Oj-nPB" secondAttribute="trailing" constant="10" id="wI1-ig-woQ"/>
                 </constraints>
             </tableViewCellContentView>
@@ -155,12 +170,16 @@
                 <outlet property="contentLabel" destination="M7N-Oj-nPB" id="7OA-3Y-Ubw"/>
                 <outlet property="iconImageView" destination="Pot-Vt-JTo" id="WC2-TS-4P2"/>
                 <outlet property="nameLabel" destination="say-2S-cdQ" id="fLy-DL-SoT"/>
+                <outlet property="picCollectionView" destination="prZ-z7-fUD" id="AKa-si-Uob"/>
+                <outlet property="picHeightConstraint" destination="r62-Mr-B4P" id="Yb8-5a-pA0"/>
+                <outlet property="picLayout" destination="L4n-mt-RFN" id="39N-I0-Ceb"/>
+                <outlet property="picWidthConstraint" destination="wln-eU-5m8" id="Rnt-dS-gSn"/>
                 <outlet property="sourceLabel" destination="kBl-oK-a9x" id="IwA-Ci-EOG"/>
                 <outlet property="timeLabel" destination="fUf-hS-1Bg" id="vru-Gc-N5P"/>
                 <outlet property="verifiedImageView" destination="X6a-xZ-cAG" id="vQs-RU-yb3"/>
                 <outlet property="vipImageView" destination="wKn-Nm-qtt" id="NQ1-0W-Cq1"/>
             </connections>
-            <point key="canvasLocation" x="308.5" y="298.5"/>
+            <point key="canvasLocation" x="308.5" y="337"/>
         </tableViewCell>
     </objects>
     <resources>
