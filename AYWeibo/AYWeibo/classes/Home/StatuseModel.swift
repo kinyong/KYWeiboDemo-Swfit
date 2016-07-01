@@ -26,6 +26,9 @@ class StatuseModel: NSObject {
     
     /// 缩略图片地址，没有时不返回此字段
     var pic_urls: [[String: AnyObject]]?
+    
+    /// 转发微博
+    var retweeted_status: StatuseModel?
 
 
     init(dict: [String: AnyObject]) {
@@ -43,11 +46,16 @@ class StatuseModel: NSObject {
             return
         }
         
+        if key == "retweeted_status" {
+            retweeted_status = StatuseModel(dict: value as! [String: AnyObject])
+            return
+        }
+        
         super.setValue(value, forKey: key)
     }
     
     override var description: String {
-        let keys = ["created_at", "idstr", "text", "source", "user", "thumbnail_pic"]
+        let keys = ["created_at", "idstr", "text", "source", "user", "thumbnail_pic", "retweeted_status"]
         let dict = dictionaryWithValuesForKeys(keys)
         
         return "\(dict)"

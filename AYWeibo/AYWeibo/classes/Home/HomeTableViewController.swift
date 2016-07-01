@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 
 private let reuseIdentifier = "HomeCell"
+private let reuseIdentifierForward = "ForwardCell"
 
 class HomeTableViewController: BaseViewController {
     
@@ -55,6 +56,7 @@ class HomeTableViewController: BaseViewController {
         
         // 5.创建cell并注册标示符
         self.tableView.registerNib(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+        self.tableView.registerNib(UINib(nibName: "ForwardTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierForward)
         self.tableView.separatorStyle = .None
     }
     
@@ -76,8 +78,10 @@ class HomeTableViewController: BaseViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let identifier = (statuses![indexPath.row].forward_content_text != nil) ? reuseIdentifierForward : reuseIdentifier
         // 1.获取cell
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! HomeTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! HomeTableViewCell
         // 2.设置数据
         cell.viewModel = statuses?[indexPath.row]
         // 3.返回cell
@@ -88,13 +92,13 @@ class HomeTableViewController: BaseViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let viewModel = statuses![indexPath.row]
+        let identifier = (statuses![indexPath.row].forward_content_text != nil) ? reuseIdentifierForward : reuseIdentifier
         
         // 1.如果缓存中有值
         guard let height = rowHeightCache[viewModel.statuse.idstr ?? "-1"] else {
-            QL3("")
             // 2.如果缓存中没有值
             // 2.1 获取当前显示的cell
-            let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as! HomeTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! HomeTableViewCell
             // 2.2 计算行高
             let rowHeigth = cell.calculateRowHeight(statuses![indexPath.row])
             // 2.3 缓存行高

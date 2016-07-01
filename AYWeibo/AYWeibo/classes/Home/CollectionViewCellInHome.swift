@@ -22,6 +22,7 @@ class CollectionViewCellInHome: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         picImageView.contentMode = .ScaleAspectFill
+        picImageView.clipsToBounds = true
         contentView.addSubview(picImageView)
         setupConstraint()
     }

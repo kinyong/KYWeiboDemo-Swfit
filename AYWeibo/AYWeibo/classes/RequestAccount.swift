@@ -23,8 +23,7 @@ class RequestAccount {
         
         // 1.准备请求参数
         let parameters = ["access_token": account.access_token!, "uid": account.uid]
-        QL4(NSThread.currentThread())
-
+        
         // 2.发送请求
         NetWorkTools.shareIntance.loadUserInfo(parameters as! [String : AnyObject]) { (response) in
             guard let data = response.data else {

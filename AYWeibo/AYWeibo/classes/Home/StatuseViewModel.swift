@@ -41,8 +41,12 @@ class StatuseViewModel: NSObject {
     /// 正文
     var content_text: String?
     
+    /// 转发正文
+    var forward_content_text: String?
+    
     /// 缩略图片地址
     var thumbnail_urls: [NSURL?]?
+    
     
     init(statuse: StatuseModel) {
         self.statuse = statuse
@@ -106,7 +110,7 @@ class StatuseViewModel: NSObject {
         // 7.处理正文
         content_text = statuse.text
         
-        // 8 处理缩略图RUL
+        // 8.处理缩略图RUL
         if let pic_url = statuse.pic_urls {
             thumbnail_urls = [NSURL]()
             
@@ -120,6 +124,12 @@ class StatuseViewModel: NSObject {
                 let url = NSURL(string: urlStr)
                 thumbnail_urls?.append(url)
             }
+        }
+        
+        // 9.处理转发正文
+        if let text = statuse.retweeted_status?.text {
+            let name = statuse.retweeted_status?.user?.screen_name ?? ""
+            forward_content_text = "@" + name + ":" + text
         }
     }
 }

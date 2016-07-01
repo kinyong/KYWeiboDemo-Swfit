@@ -92,7 +92,7 @@ class MainViewController: UITabBarController {
         // 2.通过命名空间+类名创建一个类
         // 通过命名空间+类名创建的作用：避免类名重复
         let anyCls: AnyClass? = NSClassFromString(name + "." + childControllerName)
-        
+
         // 3.确定类的真实类型，只有确定类的真实类型，才能创建类对象
         guard let cls = anyCls as? UITableViewController.Type else {
             QL2("cls不能当做UITableViewController")

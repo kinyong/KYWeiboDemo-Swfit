@@ -24,6 +24,8 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet var sourceLabel: UILabel!
     /// 正文
     @IBOutlet var contentLabel: UILabel!
+    /// 转发正文
+    @IBOutlet var forwardLabel: UILabel!
     /// 配图视图
     @IBOutlet var picCollectionView: CollectionViewInHome!
     /// 配置视图布局
@@ -59,6 +61,13 @@ class HomeTableViewCell: UITableViewCell {
             
             // 7.设置正文
             contentLabel.text = viewModel?.content_text
+            
+            // 7.1 设置转发正文
+            if let text = viewModel?.forward_content_text {
+                forwardLabel.text = text
+                forwardLabel.preferredMaxLayoutWidth = UIScreen.mainScreen().bounds.width - 2 * 10
+            }
+            
             
             // 8. 每次拿到数据后刷新配图视图
             picCollectionView.reloadData()
