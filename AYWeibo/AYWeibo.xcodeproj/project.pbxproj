@@ -11,6 +11,8 @@
 		488566DF1D24FC4800E6AFC8 /* CollectionViewInHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488566DE1D24FC4800E6AFC8 /* CollectionViewInHome.swift */; };
 		488566E11D256DCC00E6AFC8 /* CollectionViewCellInHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488566E01D256DCC00E6AFC8 /* CollectionViewCellInHome.swift */; };
 		488566E31D26341500E6AFC8 /* ForwardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488566E21D26341500E6AFC8 /* ForwardTableViewCell.xib */; };
+		488566E61D26753200E6AFC8 /* RefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488566E51D26753200E6AFC8 /* RefreshView.swift */; };
+		488566E81D26755800E6AFC8 /* RefreshView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488566E71D26755800E6AFC8 /* RefreshView.xib */; };
 		DD5251531D1BCA5600B6CAF6 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5251521D1BCA5600B6CAF6 /* UserModel.swift */; };
 		DD5251561D1BE48400B6CAF6 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5251541D1BE48400B6CAF6 /* HomeTableViewCell.swift */; };
 		DD5251571D1BE48400B6CAF6 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD5251551D1BE48400B6CAF6 /* HomeTableViewCell.xib */; };
@@ -77,6 +79,8 @@
 		488566DE1D24FC4800E6AFC8 /* CollectionViewInHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewInHome.swift; sourceTree = "<group>"; };
 		488566E01D256DCC00E6AFC8 /* CollectionViewCellInHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCellInHome.swift; sourceTree = "<group>"; };
 		488566E21D26341500E6AFC8 /* ForwardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardTableViewCell.xib; sourceTree = "<group>"; };
+		488566E51D26753200E6AFC8 /* RefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshView.swift; sourceTree = "<group>"; };
+		488566E71D26755800E6AFC8 /* RefreshView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshView.xib; sourceTree = "<group>"; };
 		BFD7938325764509CF28D412 /* Pods-AYWeibo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AYWeibo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AYWeibo/Pods-AYWeibo.debug.xcconfig"; sourceTree = "<group>"; };
 		DD5251521D1BCA5600B6CAF6 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		DD5251541D1BE48400B6CAF6 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -157,6 +161,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		488566E41D26750B00E6AFC8 /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				488566E51D26753200E6AFC8 /* RefreshView.swift */,
+				488566E71D26755800E6AFC8 /* RefreshView.xib */,
+			);
+			name = Refresh;
+			sourceTree = "<group>";
+		};
 		6739A4F4E53A4B98358DAE73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +221,7 @@
 		DD677FC31CED6038004F0A4C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				488566E41D26750B00E6AFC8 /* Refresh */,
 				DDD291091D0ADDBE003C31AA /* QRCord */,
 				DDD290C01D06B868003C31AA /* Popover */,
 				DD677FCA1CED65CD004F0A4C /* HomeTableViewController.swift */,
@@ -484,6 +498,7 @@
 				488566E31D26341500E6AFC8 /* ForwardTableViewCell.xib in Resources */,
 				DD5251571D1BE48400B6CAF6 /* HomeTableViewCell.xib in Resources */,
 				DDB1ADC91D02D9F300AD1966 /* VisitorView.xib in Resources */,
+				488566E81D26755800E6AFC8 /* RefreshView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +595,7 @@
 				DD677FCD1CED65EA004F0A4C /* DiscoverTableViewController.swift in Sources */,
 				DDB1ADC51D02D1A700AD1966 /* BaseViewController.swift in Sources */,
 				DDBDE9F71CFD813A00048845 /* NullViewController.swift in Sources */,
+				488566E61D26753200E6AFC8 /* RefreshView.swift in Sources */,
 				488566E11D256DCC00E6AFC8 /* CollectionViewCellInHome.swift in Sources */,
 				DDD290BB1D042CA1003C31AA /* UIBarButtonItem+Extension.swift in Sources */,
 				DDB1ADC71D02D9D200AD1966 /* VisitorView.swift in Sources */,

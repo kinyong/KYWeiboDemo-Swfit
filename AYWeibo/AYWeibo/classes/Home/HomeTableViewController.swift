@@ -58,6 +58,9 @@ class HomeTableViewController: BaseViewController {
         self.tableView.registerNib(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
         self.tableView.registerNib(UINib(nibName: "ForwardTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierForward)
         self.tableView.separatorStyle = .None
+        
+        // 6.设置菊花
+        self.refreshControl = KYRefreshControl()
     }
     
     deinit {

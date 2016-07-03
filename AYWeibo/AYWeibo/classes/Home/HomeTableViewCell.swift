@@ -137,6 +137,7 @@ class HomeTableViewCell: UITableViewCell {
         let imageWidth: CGFloat = 90
         let imageHeight: CGFloat = 90
         let imageMargin: CGFloat = 10
+        
         // 2. 四张图片
         if count == 4 {
             let row = 2
