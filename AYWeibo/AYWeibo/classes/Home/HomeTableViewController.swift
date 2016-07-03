@@ -61,6 +61,7 @@ class HomeTableViewController: BaseViewController {
         
         // 6.设置菊花
         self.refreshControl = KYRefreshControl()
+        self.refreshControl?.addTarget(self, action: #selector(self.loadMoreData), forControlEvents: UIControlEvents.ValueChanged)
     }
     
     deinit {
@@ -118,7 +119,18 @@ class HomeTableViewController: BaseViewController {
         return 1000
     }
     
-    // MARK: - 内部控制方法
+    // MARK: - 内部控制方法s
+    
+    // 菊花刷新监听
+    func loadMoreData() {
+        QL3("refreshing")
+        NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(self.testone), userInfo: nil, repeats: false)
+    }
+    
+    func testone() {
+        QL3("test")
+        refreshControl?.endRefreshing()
+    }
     
     // 加载当前登录用户及其所关注（授权）用户的最新微博
     private func loadStatusesData() {
@@ -155,7 +167,7 @@ class HomeTableViewController: BaseViewController {
         }
     }
     
-//     3.1 缓存图片方法实现
+    // 3.1 缓存图片方法实现
     private func cacheImage(viewModels: [StatuseViewModel]) {
         // 0.创建一个队列组
         let group = dispatch_group_create()

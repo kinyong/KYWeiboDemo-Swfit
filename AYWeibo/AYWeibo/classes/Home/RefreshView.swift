@@ -28,10 +28,29 @@ class KYRefreshControl: UIRefreshControl {
     }
     
     // MARK: - 内部控制方法
+    // 刷新完成
+    override func endRefreshing() {
+        super.endRefreshing()
+        // 关闭刷新动画
+        refrenshView.stopLoadingView()
+    }
     
     // 监听frame方法： 监听刷新
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
+        if frame.origin.y == 0 || frame.origin.y == -64{
+            // 数据筛选
+            return
+        }
+        
+        // 1. 如果开始刷新, 第2步就不用执行。
+        if self.refreshing {
+            // 执行刷新动画
+            refrenshView.startLoadingView()
+            return
+        }
+        
+        // 2.没有开始刷新
         if frame.origin.y < -55 && !ratationFlag {
             ratationFlag = true
             refrenshView.rotationArrow(ratationFlag)
@@ -70,6 +89,7 @@ class RefreshView: UIView {
     
     // MARK: - 外部控制方法
     
+    /// 旋转箭头
     func rotationArrow(flag: Bool) {
         var angle: CGFloat = flag ? 0.01 : -0.01
         angle += CGFloat(M_PI)
@@ -78,5 +98,34 @@ class RefreshView: UIView {
             self.arrowImageView.transform = CGAffineTransformRotate(self.arrowImageView.transform, angle)
         }
     }
-
+    
+    /// 显示刷新图片
+    func startLoadingView() {
+        // 0.隐藏提示视图
+        tipView.hidden = true
+        
+        // 通过keyPath判断是否有添加动画
+        if let _ = loadingImageView.layer.animationForKey("laodingImageView") {
+            // 如果已经添加过动画，直接返回。保证动画整个过程只添加一次
+            return
+        }
+        QL3("")
+        // 1. 创建动画
+        let anim = CABasicAnimation(keyPath: "transform.rotation")
+        anim.toValue = 2 * M_PI
+        anim.duration = 2.0
+        anim.repeatCount = MAXFLOAT
+        
+        // 2.添加动画到图层
+        loadingImageView.layer.addAnimation(anim, forKey: "laodingImageView")
+    }
+    
+    /// 隐藏刷新图片
+    func stopLoadingView() {
+        // 0. 显示提示视图
+        tipView.hidden = false
+        
+        // 1. 移除动画
+        loadingImageView.layer.removeAllAnimations()
+    }
 }
