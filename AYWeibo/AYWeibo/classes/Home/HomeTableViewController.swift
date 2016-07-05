@@ -25,14 +25,22 @@ class HomeTableViewController: BaseViewController {
     }()
     
     /// 保存所有微博数据
-    private var statuses: [StatuseViewModel]? {
-        didSet {
-            self.tableView.reloadData()
-        }
-    }
+    private var statuses: [StatuseViewModel]?
     
     /// 缓存cell的行高
     private var rowHeightCache = [String: CGFloat]()
+    
+    /// 刷新提醒
+    private lazy var tipLabel: UILabel = {
+       let lb = UILabel()
+        lb.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.height, 44)
+        lb.text = "没有更多的数据"
+        lb.backgroundColor = UIColor.orangeColor()
+        lb.textColor = UIColor.whiteColor()
+        lb.textAlignment = .Center
+        lb.hidden = true
+        return lb
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +69,11 @@ class HomeTableViewController: BaseViewController {
         
         // 6.设置菊花
         self.refreshControl = KYRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(self.loadMoreData), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(self.loadStatusesData), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl?.beginRefreshing()
+        
+        // 7. 添加刷新提醒
+//        self.navigationController?.navigationBar.insertSubview(tipLabel, atIndex: 0)
     }
     
     deinit {
@@ -121,35 +133,37 @@ class HomeTableViewController: BaseViewController {
     
     // MARK: - 内部控制方法s
     
-    // 菊花刷新监听
-    func loadMoreData() {
-        QL3("refreshing")
-        NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(self.testone), userInfo: nil, repeats: false)
-    }
-    
-    func testone() {
-        QL3("test")
-        refreshControl?.endRefreshing()
-    }
-    
-    // 加载当前登录用户及其所关注（授权）用户的最新微博
-    private func loadStatusesData() {
-        NetWorkTools.shareIntance.loadStatuses { (response) in
+    // 加载当前登录用户的微博
+    /*
+     since_id	false	int64	若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
+     max_id	false	int64	若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
+     默认情况下, 新浪返回的数据是按照微博ID从大到小得返回给我们的
+     也就意味着微博ID越大, 这条微博发布时间就越晚
+     经过分析, 如果要实现下拉刷新需要, 指定since_id为第一条微博的id
+     如果要实现上拉加载更多, 需要指定max_id为最后一条微博id -1
+     */
+
+    @objc private func loadStatusesData() {
+        
+        // 第一次加载，idstr为nil，默认为0，初始加载20条数据，当下拉刷新时候，里面已经存放数据，就会根据idstr返回新的数据过来
+        let since_id = statuses?.first?.statuse.idstr ?? "0"
+        
+        NetWorkTools.shareIntance.loadStatuses(since_id) { (response) in
             // 1.获取网络数据
             guard let data = response.data else {
-                QL2("获取网络数据失败")
+                QL3("获取网络数据失败")
                 return
             }
             
             // 2.json转字典
             do {
-                let dict = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves) as! [String: AnyObject]
+                let dict = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as! [String: AnyObject]
                 
                 // 3.字典转模型
                 var models = [StatuseViewModel]()
-
+                
                 guard let arr = dict["statuses"] as? [[String: AnyObject]] else {
-                    QL2("提取数据失败")
+                    QL3("提取数据失败")
                     return
                 }
                 
@@ -158,12 +172,23 @@ class HomeTableViewController: BaseViewController {
                     models.append(StatuseViewModel(statuse: statuse))
                 }
                 
-                // 3.1 缓存图片
+                // 4. 处理微博数据(第一次刷新，下拉刷新）
+                if since_id == "0" {
+                    // 第一次加载
+                    self.statuses = models
+                } else {
+                    // 下拉刷新,此时statuses里面已经有值，可以用！
+                    self.statuses = models + self.statuses!
+                }
+                
+                // 5. 缓存图片
                 self.cacheImage(models)
-            
+                
             } catch {
-                QL2("json解析失败")
+                QL3("json解析失败")
+                self.refreshControl?.endRefreshing()
             }
+
         }
     }
     
@@ -192,10 +217,12 @@ class HomeTableViewController: BaseViewController {
         }
         // 3.2 存储模型 - 监听缓存图片下载完成
         dispatch_group_notify(group, dispatch_get_main_queue(), {
-            self.statuses = viewModels
+            // 刷新表格
+            self.tableView.reloadData()
+            
+            // 关闭下拉刷新提示
+            self.refreshControl?.endRefreshing()
         })
-        
-        
     }
     
     // 接收到通知后的实现方法
@@ -215,6 +242,7 @@ class HomeTableViewController: BaseViewController {
         
         // 2. 添加标题按钮
         navigationItem.titleView = titleButton
+        
     }
     
     // 标题按钮监听方法
