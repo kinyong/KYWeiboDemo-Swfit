@@ -32,13 +32,15 @@ class HomeTableViewController: BaseViewController {
     
     /// 刷新提醒
     private lazy var tipLabel: UILabel = {
-       let lb = UILabel()
-        lb.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.height, 44)
+        let lb = UILabel()
+        
+        lb.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 44)
         lb.text = "没有更多的数据"
+        lb.hidden = true
         lb.backgroundColor = UIColor.orangeColor()
         lb.textColor = UIColor.whiteColor()
         lb.textAlignment = .Center
-        lb.hidden = true
+        
         return lb
     }()
 
@@ -73,7 +75,7 @@ class HomeTableViewController: BaseViewController {
         self.refreshControl?.beginRefreshing()
         
         // 7. 添加刷新提醒
-//        self.navigationController?.navigationBar.insertSubview(tipLabel, atIndex: 0)
+        self.navigationController?.navigationBar.insertSubview(tipLabel, atIndex: 0)
     }
     
     deinit {
@@ -222,8 +224,28 @@ class HomeTableViewController: BaseViewController {
             
             // 关闭下拉刷新提示
             self.refreshControl?.endRefreshing()
+            
+            //  显示刷新提醒数据
+            self.showRefreshStatus(viewModels.count)
         })
     }
+    
+    // 显示刷新数据提示方法
+    private func showRefreshStatus(count: Int) {
+        tipLabel.text = count == 0 ? "没有更多数据" : "\(count)条数据"
+        tipLabel.hidden = false
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.tipLabel.transform = CGAffineTransformMakeTranslation(0, 44)
+            }) { (bool) in
+                UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions(rawValue: 0), animations: {
+                    self.tipLabel.transform = CGAffineTransformIdentity
+                    }, completion: { (bool) in
+                        self.tipLabel.hidden = true
+                })
+        }
+    }
+
     
     // 接收到通知后的实现方法
     @objc private func titleChange() {
