@@ -43,6 +43,10 @@ class HomeTableViewController: BaseViewController {
         
         return lb
     }()
+    
+    /// 是否最后一条微博标记，默认为false
+    /// 当是最后一条微博时候，为true；自动刷新表格，添加更早的数据。
+    private var lastStatuse = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +106,14 @@ class HomeTableViewController: BaseViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! HomeTableViewCell
         // 2.设置数据
         cell.viewModel = statuses?[indexPath.row]
+        // 3.判断是否最后一条微博
+        if indexPath.row == (statuses!.count - 1) {
+            // 如果最后一条数据，重新加载数据
+            lastStatuse = true
+            loadStatusesData()
+            
+            QL2("最后一条微博----\(statuses?[indexPath.row].statuse.user?.screen_name)")
+        }
         // 3.返回cell
         return cell
     }
@@ -148,9 +160,16 @@ class HomeTableViewController: BaseViewController {
     @objc private func loadStatusesData() {
         
         // 第一次加载，idstr为nil，默认为0，初始加载20条数据，当下拉刷新时候，里面已经存放数据，就会根据idstr返回新的数据过来
-        let since_id = statuses?.first?.statuse.idstr ?? "0"
+        var since_id = statuses?.first?.statuse.idstr ?? "0"
+        var max_id = "0"
         
-        NetWorkTools.shareIntance.loadStatuses(since_id) { (response) in
+        // 如果是最后一条数据，进行上拉显示更早数据
+        if lastStatuse {
+            max_id = statuses?.last?.statuse.idstr ?? "0"
+            since_id = "0"
+        }
+        
+        NetWorkTools.shareIntance.loadStatuses(since_id, max_id: max_id) { (response) in
             // 1.获取网络数据
             guard let data = response.data else {
                 QL3("获取网络数据失败")
@@ -175,12 +194,17 @@ class HomeTableViewController: BaseViewController {
                 }
                 
                 // 4. 处理微博数据(第一次刷新，下拉刷新）
-                if since_id == "0" {
-                    // 第一次加载
-                    self.statuses = models
-                } else {
+                if since_id != "0" {
                     // 下拉刷新,此时statuses里面已经有值，可以用！
                     self.statuses = models + self.statuses!
+
+                   
+                } else if max_id != "0" {
+                    // 上拉显示更早微博
+                    self.statuses = self.statuses! + models
+                } else {
+                    // 第一次加载
+                    self.statuses = models
                 }
                 
                 // 5. 缓存图片
