@@ -14,6 +14,18 @@ private let reuseIdentifierForward = "ForwardCell"
 
 class HomeTableViewController: BaseViewController {
     
+    /// 用户数据操作
+    private var statuseHandle = StatuseHandle()
+    
+    /// 缓存cell的行高
+    private var rowHeightCache = [String: CGFloat]()
+    
+    /// 是否最后一条微博标记，默认为false
+    /// 当是最后一条微博时候，为true；自动刷新表格，添加更早的数据。
+    private var lastStatuse = false
+    
+    // MARK: - 懒加载
+    
     /// 导航条标题按钮
     private lazy var titleButton: UIButton = {
         let btn = TitleButton()
@@ -23,12 +35,6 @@ class HomeTableViewController: BaseViewController {
         
         return btn
     }()
-    
-    /// 保存所有微博数据
-    private var statuses: [StatuseViewModel]?
-    
-    /// 缓存cell的行高
-    private var rowHeightCache = [String: CGFloat]()
     
     /// 刷新提醒
     private lazy var tipLabel: UILabel = {
@@ -44,9 +50,7 @@ class HomeTableViewController: BaseViewController {
         return lb
     }()
     
-    /// 是否最后一条微博标记，默认为false
-    /// 当是最后一条微博时候，为true；自动刷新表格，添加更早的数据。
-    private var lastStatuse = false
+    // MARK: - 生命周期方法
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +70,7 @@ class HomeTableViewController: BaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.titleChange), name: AYTransitioningManagerDismissed, object: nil)
         
         // 4.加载当前登录用户及其所关注（授权）用户的最新微博
-        loadStatusesData()
+        loadData()
         
         // 5.创建cell并注册标示符
         self.tableView.registerNib(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
@@ -75,7 +79,7 @@ class HomeTableViewController: BaseViewController {
         
         // 6.设置菊花
         self.refreshControl = KYRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(self.loadStatusesData), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(self.loadData), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl?.beginRefreshing()
         
         // 7. 添加刷新提醒
@@ -96,23 +100,23 @@ class HomeTableViewController: BaseViewController {
     // MARK: tableViewDataSurce
  
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return statuses?.count ?? 0
+        return statuseHandle.statuses?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let identifier = (statuses![indexPath.row].forward_content_text != nil) ? reuseIdentifierForward : reuseIdentifier
+        let identifier = (statuseHandle.statuses![indexPath.row].forward_content_text != nil) ? reuseIdentifierForward : reuseIdentifier
         // 1.获取cell
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! HomeTableViewCell
         // 2.设置数据
-        cell.viewModel = statuses?[indexPath.row]
+        cell.viewModel = statuseHandle.statuses?[indexPath.row]
         // 3.判断是否最后一条微博
-        if indexPath.row == (statuses!.count - 1) {
+        if indexPath.row == (statuseHandle.statuses!.count - 1) {
             // 如果最后一条数据，重新加载数据
             lastStatuse = true
-            loadStatusesData()
+            loadData()
             
-            QL2("最后一条微博----\(statuses?[indexPath.row].statuse.user?.screen_name)")
+            QL2("最后一条微博----\(statuseHandle.statuses?[indexPath.row].statuse.user?.screen_name)")
         }
         // 3.返回cell
         return cell
@@ -121,8 +125,8 @@ class HomeTableViewController: BaseViewController {
     // MARK: - tableviewDelegate
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let viewModel = statuses![indexPath.row]
-        let identifier = (statuses![indexPath.row].forward_content_text != nil) ? reuseIdentifierForward : reuseIdentifier
+        let viewModel = statuseHandle.statuses![indexPath.row]
+        let identifier = (statuseHandle.statuses![indexPath.row].forward_content_text != nil) ? reuseIdentifierForward : reuseIdentifier
         
         // 1.如果缓存中有值
         guard let height = rowHeightCache[viewModel.statuse.idstr ?? "-1"] else {
@@ -130,7 +134,7 @@ class HomeTableViewController: BaseViewController {
             // 2.1 获取当前显示的cell
             let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! HomeTableViewCell
             // 2.2 计算行高
-            let rowHeigth = cell.calculateRowHeight(statuses![indexPath.row])
+            let rowHeigth = cell.calculateRowHeight(statuseHandle.statuses![indexPath.row])
             // 2.3 缓存行高
             rowHeightCache[viewModel.statuse.idstr ?? "-1"] = rowHeigth
             // 2.4 返回行高
@@ -148,110 +152,23 @@ class HomeTableViewController: BaseViewController {
     // MARK: - 内部控制方法s
     
     // 加载当前登录用户的微博
-    /*
-     since_id	false	int64	若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
-     max_id	false	int64	若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
-     默认情况下, 新浪返回的数据是按照微博ID从大到小得返回给我们的
-     也就意味着微博ID越大, 这条微博发布时间就越晚
-     经过分析, 如果要实现下拉刷新需要, 指定since_id为第一条微博的id
-     如果要实现上拉加载更多, 需要指定max_id为最后一条微博id -1
-     */
-
-    @objc private func loadStatusesData() {
-        
-        // 第一次加载，idstr为nil，默认为0，初始加载20条数据，当下拉刷新时候，里面已经存放数据，就会根据idstr返回新的数据过来
-        var since_id = statuses?.first?.statuse.idstr ?? "0"
-        var max_id = "0"
-        
-        // 如果是最后一条数据，进行上拉显示更早数据
-        if lastStatuse {
-            max_id = statuses?.last?.statuse.idstr ?? "0"
-            since_id = "0"
-        }
-        
-        NetWorkTools.shareIntance.loadStatuses(since_id, max_id: max_id) { (response) in
-            // 1.获取网络数据
-            guard let data = response.data else {
-                QL3("获取网络数据失败")
+    @objc private func loadData() {
+        statuseHandle.loadStatusesData(lastStatuse) { (datas, error) in
+            if error != nil {
+                // 获取微博数据失败
+                self.refreshControl?.endRefreshing()
                 return
             }
             
-            // 2.json转字典
-            do {
-                let dict = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as! [String: AnyObject]
-                
-                // 3.字典转模型
-                var models = [StatuseViewModel]()
-                
-                guard let arr = dict["statuses"] as? [[String: AnyObject]] else {
-                    QL3("提取数据失败")
-                    return
-                }
-                
-                for dict in arr {
-                    let statuse = StatuseModel(dict: dict)
-                    models.append(StatuseViewModel(statuse: statuse))
-                }
-                
-                // 4. 处理微博数据(第一次刷新，下拉刷新）
-                if since_id != "0" {
-                    // 下拉刷新,此时statuses里面已经有值，可以用！
-                    self.statuses = models + self.statuses!
-
-                   
-                } else if max_id != "0" {
-                    // 上拉显示更早微博
-                    self.statuses = self.statuses! + models
-                } else {
-                    // 第一次加载
-                    self.statuses = models
-                }
-                
-                // 5. 缓存图片
-                self.cacheImage(models)
-                
-            } catch {
-                QL3("json解析失败")
-                self.refreshControl?.endRefreshing()
-            }
-
-        }
-    }
-    
-    // 3.1 缓存图片方法实现
-    private func cacheImage(viewModels: [StatuseViewModel]) {
-        // 0.创建一个队列组
-        let group = dispatch_group_create()
-
-        for viewModel in viewModels {
-            
-            // 1.从模型数据中取出配图数组
-            guard let urls = viewModel.thumbnail_urls else {
-                continue
-            }
-            
-            // 2.遍历配图数组利用SDWebImage下载图片
-            for url in urls {
-                dispatch_group_enter(group)
-                
-                SDWebImageManager.sharedManager().downloadImageWithURL(url, options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, _, _, _) in
-                    dispatch_group_leave(group)
-
-                })
-
-            }
-        }
-        // 3.2 存储模型 - 监听缓存图片下载完成
-        dispatch_group_notify(group, dispatch_get_main_queue(), {
-            // 刷新表格
+            // 1.刷新表格
             self.tableView.reloadData()
             
-            // 关闭下拉刷新提示
+            // 2.关闭下拉刷新提示
             self.refreshControl?.endRefreshing()
             
-            //  显示刷新提醒数据
-            self.showRefreshStatus(viewModels.count)
-        })
+            //  3.显示刷新提醒数据
+            self.showRefreshStatus(datas!.count)
+        }
     }
     
     // 显示刷新数据提示方法
