@@ -15,6 +15,8 @@ let AYTransitioningManagerPresented = "AYTransitioningManagerPresented"
 let AYTransitioningManagerDismissed = "AYTransitioningManagerDismissed"
 /// 切换根控制器的通知
 let AYSwitchRootViewController =  "AYSwitchRootViewController"
+/// 首页cell缩略图点击显示图片浏览通知
+let KYHomeCellShowImageView = "KYHomeCellShowImageView"
 
 // MARK: - 定义扫描码标签栏按钮Tag
 let qrCodeItemTag: Int = 100001

@@ -45,7 +45,10 @@ class StatuseViewModel: NSObject {
     var forward_content_text: String?
     
     /// 缩略图片地址
-    var thumbnail_urls: [NSURL?]?
+    var thumbnail_urls: [NSURL]?
+    
+    /// 大图图片地址
+    var bmiddle_urls: [NSURL]?
     
     
     init(statuse: StatuseModel) {
@@ -113,16 +116,23 @@ class StatuseViewModel: NSObject {
         // 8.处理缩略图RUL
         if let pic_url = statuse.pic_urls {
             thumbnail_urls = [NSURL]()
+            bmiddle_urls = [NSURL]()
             
-            // 1. 从模型中取出配图数据
+            // 8.1 从模型中取出配图数据
             for dict in pic_url {
-                guard let urlStr = dict["thumbnail_pic"] as? String else {
+                guard var urlStr = dict["thumbnail_pic"] as? String else {
                     continue
                 }
                 
-                // 2.2 根据字符串创建URL
-                let url = NSURL(string: urlStr)
+                var url = NSURL(string: urlStr)!
+                
+                // 8.2 根据字符串创建URL
                 thumbnail_urls?.append(url)
+                
+                // 8.3 创建大图URL
+                urlStr = urlStr.stringByReplacingOccurrencesOfString("thumbnail", withString: "bmiddle")
+                url = NSURL(string: urlStr)!
+                bmiddle_urls?.append(url)
             }
         }
         

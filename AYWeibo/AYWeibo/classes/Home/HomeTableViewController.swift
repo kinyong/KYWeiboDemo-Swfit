@@ -68,6 +68,7 @@ class HomeTableViewController: BaseViewController {
         // 3.注册通知
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.titleChange), name: AYTransitioningManagerPresented, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.titleChange), name: AYTransitioningManagerDismissed, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.showImageBrowser(_:)), name: KYHomeCellShowImageView, object: nil)
         
         // 4.加载当前登录用户及其所关注（授权）用户的最新微博
         loadData()
@@ -185,6 +186,23 @@ class HomeTableViewController: BaseViewController {
                         self.tipLabel.hidden = true
                 })
         }
+    }
+    
+    // 接收到图片按钮点击通知后实现的方法
+    @objc private func showImageBrowser(notification: NSNotification) {
+        // 注意：但凡通过网络或者通知获取到的数据，都要进行安全校验
+        guard let bmiddle_urls = notification.userInfo!["bmiddle_urls"] as? [NSURL] else {
+            QL3("通知中心没有图片地址")
+            return
+        }
+        
+        guard let indexPath = notification.userInfo!["indexPath"] as? NSIndexPath else {
+            QL3("通知中心没有索引")
+            return
+        }
+        
+        let vc = ImageBrowserViewController(bmiddle_urls: bmiddle_urls, indexPath: indexPath)
+        self.presentViewController(vc, animated: true, completion: nil)
     }
 
     

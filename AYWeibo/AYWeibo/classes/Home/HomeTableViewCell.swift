@@ -74,9 +74,11 @@ class HomeTableViewCell: UITableViewCell {
             
             // 8.1 将thumbnail_urls传递给picCollectionView
             picCollectionView.thumbnail_urls = viewModel?.thumbnail_urls
+            picCollectionView.bmiddle_urls = viewModel?.bmiddle_urls
+           
+            // 8.2 更新item尺寸
             let (itemSize, collectionViewSize) = calculateSize()
             
-            // 8.2 更新item尺寸
             if itemSize != CGSizeZero {
                 picLayout.itemSize = itemSize
                 
@@ -128,7 +130,7 @@ class HomeTableViewCell: UITableViewCell {
         if count == 1 {
             if let url = viewModel?.thumbnail_urls?.first  {
                 // 1.1 获取缓存中的图片
-                let image = SDWebImageManager.sharedManager().imageCache.imageFromDiskCacheForKey(url!.absoluteString)
+                let image = SDWebImageManager.sharedManager().imageCache.imageFromDiskCacheForKey(url.absoluteString)
                 
                 return (image.size, image.size)
             }

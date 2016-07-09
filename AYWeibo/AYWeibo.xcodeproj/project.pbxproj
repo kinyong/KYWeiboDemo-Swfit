@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		45C9503927702273DE26EE20 /* Pods_AYWeibo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA538AAE5F6A62028BC66BAA /* Pods_AYWeibo.framework */; };
 		483AFBAD1D2FE40800A770F1 /* StatuseHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFBAC1D2FE40800A770F1 /* StatuseHandle.swift */; };
+		483AFBB01D30D99200A770F1 /* ImageBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFBAF1D30D99200A770F1 /* ImageBrowserViewController.swift */; };
 		488566DF1D24FC4800E6AFC8 /* CollectionViewInHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488566DE1D24FC4800E6AFC8 /* CollectionViewInHome.swift */; };
 		488566E11D256DCC00E6AFC8 /* CollectionViewCellInHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488566E01D256DCC00E6AFC8 /* CollectionViewCellInHome.swift */; };
 		488566E31D26341500E6AFC8 /* ForwardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488566E21D26341500E6AFC8 /* ForwardTableViewCell.xib */; };
@@ -78,6 +79,7 @@
 
 /* Begin PBXFileReference section */
 		483AFBAC1D2FE40800A770F1 /* StatuseHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatuseHandle.swift; sourceTree = "<group>"; };
+		483AFBAF1D30D99200A770F1 /* ImageBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowserViewController.swift; sourceTree = "<group>"; };
 		488566DE1D24FC4800E6AFC8 /* CollectionViewInHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewInHome.swift; sourceTree = "<group>"; };
 		488566E01D256DCC00E6AFC8 /* CollectionViewCellInHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCellInHome.swift; sourceTree = "<group>"; };
 		488566E21D26341500E6AFC8 /* ForwardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardTableViewCell.xib; sourceTree = "<group>"; };
@@ -163,6 +165,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		483AFBAE1D30D96800A770F1 /* Browser */ = {
+			isa = PBXGroup;
+			children = (
+				483AFBAF1D30D99200A770F1 /* ImageBrowserViewController.swift */,
+			);
+			name = Browser;
+			sourceTree = "<group>";
+		};
 		488566E41D26750B00E6AFC8 /* Refresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +233,7 @@
 		DD677FC31CED6038004F0A4C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				483AFBAE1D30D96800A770F1 /* Browser */,
 				488566E41D26750B00E6AFC8 /* Refresh */,
 				DDD291091D0ADDBE003C31AA /* QRCord */,
 				DDD290C01D06B868003C31AA /* Popover */,
@@ -612,6 +623,7 @@
 				483AFBAD1D2FE40800A770F1 /* StatuseHandle.swift in Sources */,
 				DDD2918D1D154F82003C31AA /* QRCodeCreateViewController.swift in Sources */,
 				DDD291901D182D97003C31AA /* OAuthViewController.swift in Sources */,
+				483AFBB01D30D99200A770F1 /* ImageBrowserViewController.swift in Sources */,
 				DD7A623A1D1A636F009427C1 /* NewfeatureViewController.swift in Sources */,
 				DDD2910B1D0ADF7B003C31AA /* QRCordViewController.swift in Sources */,
 			);

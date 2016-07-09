@@ -13,16 +13,19 @@ class CollectionViewInHome: UICollectionView {
 
        
     /// 配图地址
-    var thumbnail_urls: [NSURL?]? {
+    var thumbnail_urls: [NSURL]? {
         didSet {
             self.reloadData()
         }
     }
     
+    /// 大图图片地址
+    var bmiddle_urls: [NSURL]?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.registerClass(CollectionViewCellInHome.self, forCellWithReuseIdentifier:"CollectionViewCellInHome")
-        //        self.delegate = self
+        self.delegate = self
         self.dataSource = self
     }
 }
@@ -43,5 +46,13 @@ extension CollectionViewInHome: UICollectionViewDataSource {
         cell.backgroundColor = UIColor.redColor()
         
         return cell
+    }
+}
+
+// MARK: -delegate
+extension CollectionViewInHome: UICollectionViewDelegate {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // 当点击首页cell的缩略图时候，通知首页控制器进行modle显示图片浏览
+        NSNotificationCenter.defaultCenter().postNotificationName(KYHomeCellShowImageView, object: self, userInfo: ["bmiddle_urls": bmiddle_urls!, "indexPath": indexPath])
     }
 }
