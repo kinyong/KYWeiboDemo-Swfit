@@ -66,6 +66,11 @@ class ImageBrowserViewController: UIViewController {
         // 初始化UI
         setupUI()
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        collectionview.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: false)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -109,10 +114,10 @@ extension ImageBrowserViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageBrowserViewController", forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageBrowserViewController", forIndexPath: indexPath) as! ImageBrowserCell
         
         cell.backgroundColor = (indexPath.item % 2 == 0) ? UIColor.redColor() : UIColor.blueColor()
-        
+        cell.bmiddle_url = bmiddle_urls[indexPath.item]
         
         return cell
     }
