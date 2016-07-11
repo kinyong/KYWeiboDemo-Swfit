@@ -10,6 +10,7 @@
 		45C9503927702273DE26EE20 /* Pods_AYWeibo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA538AAE5F6A62028BC66BAA /* Pods_AYWeibo.framework */; };
 		483AFBAD1D2FE40800A770F1 /* StatuseHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFBAC1D2FE40800A770F1 /* StatuseHandle.swift */; };
 		483AFBB01D30D99200A770F1 /* ImageBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFBAF1D30D99200A770F1 /* ImageBrowserViewController.swift */; };
+		483AFBFC1D333F1300A770F1 /* ImageBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFBFB1D333F1200A770F1 /* ImageBrowserCell.swift */; };
 		488566DF1D24FC4800E6AFC8 /* CollectionViewInHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488566DE1D24FC4800E6AFC8 /* CollectionViewInHome.swift */; };
 		488566E11D256DCC00E6AFC8 /* CollectionViewCellInHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488566E01D256DCC00E6AFC8 /* CollectionViewCellInHome.swift */; };
 		488566E31D26341500E6AFC8 /* ForwardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488566E21D26341500E6AFC8 /* ForwardTableViewCell.xib */; };
@@ -80,6 +81,7 @@
 /* Begin PBXFileReference section */
 		483AFBAC1D2FE40800A770F1 /* StatuseHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatuseHandle.swift; sourceTree = "<group>"; };
 		483AFBAF1D30D99200A770F1 /* ImageBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowserViewController.swift; sourceTree = "<group>"; };
+		483AFBFB1D333F1200A770F1 /* ImageBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowserCell.swift; sourceTree = "<group>"; };
 		488566DE1D24FC4800E6AFC8 /* CollectionViewInHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewInHome.swift; sourceTree = "<group>"; };
 		488566E01D256DCC00E6AFC8 /* CollectionViewCellInHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCellInHome.swift; sourceTree = "<group>"; };
 		488566E21D26341500E6AFC8 /* ForwardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardTableViewCell.xib; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				483AFBAF1D30D99200A770F1 /* ImageBrowserViewController.swift */,
+				483AFBFB1D333F1200A770F1 /* ImageBrowserCell.swift */,
 			);
 			name = Browser;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				488566DF1D24FC4800E6AFC8 /* CollectionViewInHome.swift in Sources */,
 				DDD6F5FA1D18C5D5009ED1B0 /* UserAccount.swift in Sources */,
 				DDD291151D0B44D9003C31AA /* AYMacroMethod.swift in Sources */,
+				483AFBFC1D333F1300A770F1 /* ImageBrowserCell.swift in Sources */,
 				DD699C951CEBADEE00E4704D /* AppDelegate.swift in Sources */,
 				DD677FCD1CED65EA004F0A4C /* DiscoverTableViewController.swift in Sources */,
 				DDB1ADC51D02D1A700AD1966 /* BaseViewController.swift in Sources */,
