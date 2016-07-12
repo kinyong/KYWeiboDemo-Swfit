@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ImageBrowserViewController: UIViewController {
     /// 大图图片地址
     var bmiddle_urls: [NSURL]
-    
+    /// 缩略图片地址
+    var thumbnail_urls: [NSURL]
     /// 索引
     var indexPath: NSIndexPath
     
@@ -50,9 +52,10 @@ class ImageBrowserViewController: UIViewController {
     
     // MARK: - 系统内部方法
     
-    init(bmiddle_urls: [NSURL], indexPath: NSIndexPath ) {
+    init(bmiddle_urls: [NSURL], thumbnail_urls: [NSURL], indexPath: NSIndexPath ) {
         self.bmiddle_urls = bmiddle_urls
         self.indexPath = indexPath
+        self.thumbnail_urls = thumbnail_urls
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -117,6 +120,8 @@ extension ImageBrowserViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageBrowserViewController", forIndexPath: indexPath) as! ImageBrowserCell
         
         cell.backgroundColor = (indexPath.item % 2 == 0) ? UIColor.redColor() : UIColor.blueColor()
+        cell.thumbnail_url = thumbnail_urls[indexPath.item]
+        cell.thumbnailImageView.sd_setImageWithURL(thumbnail_urls[indexPath.item])
         cell.bmiddle_url = bmiddle_urls[indexPath.item]
         
         return cell

@@ -11,6 +11,8 @@
 		483AFBAD1D2FE40800A770F1 /* StatuseHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFBAC1D2FE40800A770F1 /* StatuseHandle.swift */; };
 		483AFBB01D30D99200A770F1 /* ImageBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFBAF1D30D99200A770F1 /* ImageBrowserViewController.swift */; };
 		483AFBFC1D333F1300A770F1 /* ImageBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFBFB1D333F1200A770F1 /* ImageBrowserCell.swift */; };
+		483AFC431D34AC0300A770F1 /* KYProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFC411D34AC0300A770F1 /* KYProgressView.swift */; };
+		483AFC441D34AC0300A770F1 /* KYProgressImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFC421D34AC0300A770F1 /* KYProgressImgView.swift */; };
 		488566DF1D24FC4800E6AFC8 /* CollectionViewInHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488566DE1D24FC4800E6AFC8 /* CollectionViewInHome.swift */; };
 		488566E11D256DCC00E6AFC8 /* CollectionViewCellInHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488566E01D256DCC00E6AFC8 /* CollectionViewCellInHome.swift */; };
 		488566E31D26341500E6AFC8 /* ForwardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488566E21D26341500E6AFC8 /* ForwardTableViewCell.xib */; };
@@ -82,6 +84,8 @@
 		483AFBAC1D2FE40800A770F1 /* StatuseHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatuseHandle.swift; sourceTree = "<group>"; };
 		483AFBAF1D30D99200A770F1 /* ImageBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowserViewController.swift; sourceTree = "<group>"; };
 		483AFBFB1D333F1200A770F1 /* ImageBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowserCell.swift; sourceTree = "<group>"; };
+		483AFC411D34AC0300A770F1 /* KYProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYProgressView.swift; sourceTree = "<group>"; };
+		483AFC421D34AC0300A770F1 /* KYProgressImgView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYProgressImgView.swift; sourceTree = "<group>"; };
 		488566DE1D24FC4800E6AFC8 /* CollectionViewInHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewInHome.swift; sourceTree = "<group>"; };
 		488566E01D256DCC00E6AFC8 /* CollectionViewCellInHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCellInHome.swift; sourceTree = "<group>"; };
 		488566E21D26341500E6AFC8 /* ForwardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardTableViewCell.xib; sourceTree = "<group>"; };
@@ -174,6 +178,15 @@
 				483AFBFB1D333F1200A770F1 /* ImageBrowserCell.swift */,
 			);
 			name = Browser;
+			sourceTree = "<group>";
+		};
+		483AFC401D34ABEE00A770F1 /* progress */ = {
+			isa = PBXGroup;
+			children = (
+				483AFC411D34AC0300A770F1 /* KYProgressView.swift */,
+				483AFC421D34AC0300A770F1 /* KYProgressImgView.swift */,
+			);
+			path = progress;
 			sourceTree = "<group>";
 		};
 		488566E41D26750B00E6AFC8 /* Refresh */ = {
@@ -285,6 +298,7 @@
 		DD677FC71CED6038004F0A4C /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				483AFC401D34ABEE00A770F1 /* progress */,
 				DDD290B81D0425DC003C31AA /* UIButton+Extension.swift */,
 				DDD290BA1D042CA1003C31AA /* UIBarButtonItem+Extension.swift */,
 				DDD2910E1D0AFDF0003C31AA /* UITabBarItemExtension.swift */,
@@ -609,11 +623,13 @@
 				DDD6F5FA1D18C5D5009ED1B0 /* UserAccount.swift in Sources */,
 				DDD291151D0B44D9003C31AA /* AYMacroMethod.swift in Sources */,
 				483AFBFC1D333F1300A770F1 /* ImageBrowserCell.swift in Sources */,
+				483AFC431D34AC0300A770F1 /* KYProgressView.swift in Sources */,
 				DD699C951CEBADEE00E4704D /* AppDelegate.swift in Sources */,
 				DD677FCD1CED65EA004F0A4C /* DiscoverTableViewController.swift in Sources */,
 				DDB1ADC51D02D1A700AD1966 /* BaseViewController.swift in Sources */,
 				DDBDE9F71CFD813A00048845 /* NullViewController.swift in Sources */,
 				488566E61D26753200E6AFC8 /* RefreshView.swift in Sources */,
+				483AFC441D34AC0300A770F1 /* KYProgressImgView.swift in Sources */,
 				488566E11D256DCC00E6AFC8 /* CollectionViewCellInHome.swift in Sources */,
 				DDD290BB1D042CA1003C31AA /* UIBarButtonItem+Extension.swift in Sources */,
 				DDB1ADC71D02D9D200AD1966 /* VisitorView.swift in Sources */,

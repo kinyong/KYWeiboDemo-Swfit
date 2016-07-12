@@ -196,12 +196,17 @@ class HomeTableViewController: BaseViewController {
             return
         }
         
+        guard let thumbnail_urls = notification.userInfo!["thumbnail_urls"] as? [NSURL] else {
+            QL3("通知中心没有图片地址")
+            return
+        }
+        
         guard let indexPath = notification.userInfo!["indexPath"] as? NSIndexPath else {
             QL3("通知中心没有索引")
             return
         }
         
-        let vc = ImageBrowserViewController(bmiddle_urls: bmiddle_urls, indexPath: indexPath)
+        let vc = ImageBrowserViewController(bmiddle_urls: bmiddle_urls, thumbnail_urls: thumbnail_urls, indexPath: indexPath)
         self.presentViewController(vc, animated: true, completion: nil)
     }
 

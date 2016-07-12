@@ -53,6 +53,6 @@ extension CollectionViewInHome: UICollectionViewDataSource {
 extension CollectionViewInHome: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // 当点击首页cell的缩略图时候，通知首页控制器进行modle显示图片浏览
-        NSNotificationCenter.defaultCenter().postNotificationName(KYHomeCellShowImageView, object: self, userInfo: ["bmiddle_urls": bmiddle_urls!, "indexPath": indexPath])
+        NSNotificationCenter.defaultCenter().postNotificationName(KYHomeCellShowImageView, object: self, userInfo: ["bmiddle_urls": bmiddle_urls!, "thumbnail_urls":thumbnail_urls!, "indexPath": indexPath])
     }
 }
