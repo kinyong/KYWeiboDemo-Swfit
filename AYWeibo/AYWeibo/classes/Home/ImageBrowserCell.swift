@@ -123,7 +123,6 @@ class ImageBrowserCell: UICollectionViewCell {
         scrollView.addSubview(imageView)
         // 2.布局子控件
         scrollView.frame = self.bounds
-        scrollView.backgroundColor = UIColor.greenColor()
     }
     
     

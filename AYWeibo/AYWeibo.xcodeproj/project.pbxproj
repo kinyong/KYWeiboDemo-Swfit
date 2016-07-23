@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		45C9503927702273DE26EE20 /* Pods_AYWeibo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA538AAE5F6A62028BC66BAA /* Pods_AYWeibo.framework */; };
+		48117D231D3FEF5D000B73D1 /* JYBrowserPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48117D221D3FEF5D000B73D1 /* JYBrowserPresentationController.swift */; };
 		483AFBAD1D2FE40800A770F1 /* StatuseHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFBAC1D2FE40800A770F1 /* StatuseHandle.swift */; };
 		483AFBB01D30D99200A770F1 /* ImageBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFBAF1D30D99200A770F1 /* ImageBrowserViewController.swift */; };
 		483AFBFC1D333F1300A770F1 /* ImageBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483AFBFB1D333F1200A770F1 /* ImageBrowserCell.swift */; };
@@ -81,6 +82,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		48117D221D3FEF5D000B73D1 /* JYBrowserPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYBrowserPresentationController.swift; sourceTree = "<group>"; };
 		483AFBAC1D2FE40800A770F1 /* StatuseHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatuseHandle.swift; sourceTree = "<group>"; };
 		483AFBAF1D30D99200A770F1 /* ImageBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowserViewController.swift; sourceTree = "<group>"; };
 		483AFBFB1D333F1200A770F1 /* ImageBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowserCell.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			children = (
 				483AFBAF1D30D99200A770F1 /* ImageBrowserViewController.swift */,
 				483AFBFB1D333F1200A770F1 /* ImageBrowserCell.swift */,
+				48117D221D3FEF5D000B73D1 /* JYBrowserPresentationController.swift */,
 			);
 			name = Browser;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				DD7A624D1D1A9F17009427C1 /* AYNewfeatureCell.swift in Sources */,
 				DDD6F5F81D187188009ED1B0 /* NetWorkTools.swift in Sources */,
 				DD5251591D1D1CD900B6CAF6 /* NSDate+Extension.swift in Sources */,
+				48117D231D3FEF5D000B73D1 /* JYBrowserPresentationController.swift in Sources */,
 				DD7A624B1D1A99AA009427C1 /* AYNewfeatureLayout.swift in Sources */,
 				DDD6F5FC1D19283F009ED1B0 /* String+Extension.swift in Sources */,
 				488566DF1D24FC4800E6AFC8 /* CollectionViewInHome.swift in Sources */,

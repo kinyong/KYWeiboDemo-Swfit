@@ -21,7 +21,7 @@ class ImageBrowserViewController: UIViewController {
     
     private lazy var collectionview: UICollectionView = {
         let clv = UICollectionView(frame: CGRectZero, collectionViewLayout: ImageBrowserLayout())
-        
+        clv.backgroundColor = UIColor.clearColor()
         clv.dataSource = self
         clv.registerClass(ImageBrowserCell.self, forCellWithReuseIdentifier: "ImageBrowserViewController")
         
@@ -118,8 +118,6 @@ extension ImageBrowserViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageBrowserViewController", forIndexPath: indexPath) as! ImageBrowserCell
-        
-        cell.backgroundColor = (indexPath.item % 2 == 0) ? UIColor.redColor() : UIColor.blueColor()
         cell.thumbnail_url = thumbnail_urls[indexPath.item]
         cell.thumbnailImageView.sd_setImageWithURL(thumbnail_urls[indexPath.item])
         cell.bmiddle_url = bmiddle_urls[indexPath.item]

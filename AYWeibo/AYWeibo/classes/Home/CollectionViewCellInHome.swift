@@ -11,7 +11,7 @@ import SDWebImage
 
 class CollectionViewCellInHome: UICollectionViewCell {
     /// 显示微博图片
-    private lazy var picImageView: UIImageView = UIImageView()
+    lazy var picImageView: UIImageView = UIImageView()
     
     // 显示gif图片
     private lazy var gifImageView: UIImageView = {

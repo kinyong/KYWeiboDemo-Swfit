@@ -33,7 +33,7 @@ class TitleButton: UIButton {
     }
     
     override func setTitle(title: String?, forState state: UIControlState) {
-        // ?? 表示如果title有值，就调用title，没有值就取？？后面的""
+        // ?? 表示如果title有值，就调用title，没有值就取？？后面的" "
         super.setTitle((title ?? "") + "  ", forState: state)
     }
     

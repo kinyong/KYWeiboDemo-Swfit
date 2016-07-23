@@ -50,6 +50,9 @@ class HomeTableViewController: BaseViewController {
         return lb
     }()
     
+    /// 图片浏览器过渡动画管理
+    private lazy var browserPresentationManager: JYBrowserPresentationController = JYBrowserPresentationController()
+    
     // MARK: - 生命周期方法
 
     override func viewDidLoad() {
@@ -206,7 +209,20 @@ class HomeTableViewController: BaseViewController {
             return
         }
         
+        guard let pictureView = notification.object as? CollectionViewInHome else {
+            QL3("无法获取发送通知的对象")
+            return
+        }
+        
+        // 1.弹出图片浏览器，将所有图片和当前点击的索引传递给浏览器
         let vc = ImageBrowserViewController(bmiddle_urls: bmiddle_urls, thumbnail_urls: thumbnail_urls, indexPath: indexPath)
+        // 2.设置转场动画代理
+        vc.transitioningDelegate = browserPresentationManager
+        // 3.设置转场动画样式
+        vc.modalPresentationStyle = .Custom
+        // 4.设置转场动画需要的数据代理
+        browserPresentationManager.setDefaultInfo(indexPath, browserDelegate: pictureView)
+        
         self.presentViewController(vc, animated: true, completion: nil)
     }
 
