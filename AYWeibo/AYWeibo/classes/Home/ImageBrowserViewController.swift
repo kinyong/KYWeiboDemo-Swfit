@@ -85,8 +85,21 @@ class ImageBrowserViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
     @objc private func saveBtnClick() {
-        
+        // 1.获取当前显示图片的索引
+        let indexPath = collectionview.indexPathsForVisibleItems().last!
+        // 2.获取当前显示的cell
+        let cell = collectionview.cellForItemAtIndexPath(indexPath) as! ImageBrowserCell
+        // 3.获取当前显示的图片
+        let image = cell.imageView.image!
+        // 4.保存图片,图片保存成功后，会调用第3参数的方法
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    // 保存图片后调用的方法
+    func image(image: UIImage, didFinishSavingWithError: NSError, contextInfo: AnyObject) {
+        QL2("保存成功")
     }
     
     private func setupUI() {
