@@ -19,6 +19,9 @@
 		488566E31D26341500E6AFC8 /* ForwardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488566E21D26341500E6AFC8 /* ForwardTableViewCell.xib */; };
 		488566E61D26753200E6AFC8 /* RefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488566E51D26753200E6AFC8 /* RefreshView.swift */; };
 		488566E81D26755800E6AFC8 /* RefreshView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488566E71D26755800E6AFC8 /* RefreshView.xib */; };
+		4B2F1D121D43C513006FEBF8 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2F1D111D43C513006FEBF8 /* ComposeViewController.swift */; };
+		4B2F1D141D43C78A006FEBF8 /* JYTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2F1D131D43C78A006FEBF8 /* JYTitleView.swift */; };
+		4B2F1D161D43D7E1006FEBF8 /* JYTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2F1D151D43D7E1006FEBF8 /* JYTextView.swift */; };
 		DD5251531D1BCA5600B6CAF6 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5251521D1BCA5600B6CAF6 /* UserModel.swift */; };
 		DD5251561D1BE48400B6CAF6 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5251541D1BE48400B6CAF6 /* HomeTableViewCell.swift */; };
 		DD5251571D1BE48400B6CAF6 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD5251551D1BE48400B6CAF6 /* HomeTableViewCell.xib */; };
@@ -93,6 +96,9 @@
 		488566E21D26341500E6AFC8 /* ForwardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardTableViewCell.xib; sourceTree = "<group>"; };
 		488566E51D26753200E6AFC8 /* RefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshView.swift; sourceTree = "<group>"; };
 		488566E71D26755800E6AFC8 /* RefreshView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshView.xib; sourceTree = "<group>"; };
+		4B2F1D111D43C513006FEBF8 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ComposeViewController.swift; path = AYWeibo/classes/Home/ComposeViewController.swift; sourceTree = SOURCE_ROOT; };
+		4B2F1D131D43C78A006FEBF8 /* JYTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JYTitleView.swift; path = AYWeibo/classes/Home/JYTitleView.swift; sourceTree = SOURCE_ROOT; };
+		4B2F1D151D43D7E1006FEBF8 /* JYTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JYTextView.swift; path = AYWeibo/classes/Home/JYTextView.swift; sourceTree = SOURCE_ROOT; };
 		BFD7938325764509CF28D412 /* Pods-AYWeibo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AYWeibo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AYWeibo/Pods-AYWeibo.debug.xcconfig"; sourceTree = "<group>"; };
 		DD5251521D1BCA5600B6CAF6 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		DD5251541D1BE48400B6CAF6 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -237,6 +243,9 @@
 		DD677FC11CED6038004F0A4C /* Compose */ = {
 			isa = PBXGroup;
 			children = (
+				4B2F1D111D43C513006FEBF8 /* ComposeViewController.swift */,
+				4B2F1D131D43C78A006FEBF8 /* JYTitleView.swift */,
+				4B2F1D151D43D7E1006FEBF8 /* JYTextView.swift */,
 			);
 			path = Compose;
 			sourceTree = "<group>";
@@ -632,6 +641,7 @@
 				DD677FCD1CED65EA004F0A4C /* DiscoverTableViewController.swift in Sources */,
 				DDB1ADC51D02D1A700AD1966 /* BaseViewController.swift in Sources */,
 				DDBDE9F71CFD813A00048845 /* NullViewController.swift in Sources */,
+				4B2F1D121D43C513006FEBF8 /* ComposeViewController.swift in Sources */,
 				488566E61D26753200E6AFC8 /* RefreshView.swift in Sources */,
 				483AFC441D34AC0300A770F1 /* KYProgressImgView.swift in Sources */,
 				488566E11D256DCC00E6AFC8 /* CollectionViewCellInHome.swift in Sources */,
@@ -643,12 +653,14 @@
 				DDD290C41D06C684003C31AA /* AYPresentationController.swift in Sources */,
 				DD5251531D1BCA5600B6CAF6 /* UserModel.swift in Sources */,
 				DD5251561D1BE48400B6CAF6 /* HomeTableViewCell.swift in Sources */,
+				4B2F1D141D43C78A006FEBF8 /* JYTitleView.swift in Sources */,
 				DDD291111D0B122C003C31AA /* AYScanView.swift in Sources */,
 				483AFBAD1D2FE40800A770F1 /* StatuseHandle.swift in Sources */,
 				DDD2918D1D154F82003C31AA /* QRCodeCreateViewController.swift in Sources */,
 				DDD291901D182D97003C31AA /* OAuthViewController.swift in Sources */,
 				483AFBB01D30D99200A770F1 /* ImageBrowserViewController.swift in Sources */,
 				DD7A623A1D1A636F009427C1 /* NewfeatureViewController.swift in Sources */,
+				4B2F1D161D43D7E1006FEBF8 /* JYTextView.swift in Sources */,
 				DDD2910B1D0ADF7B003C31AA /* QRCordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

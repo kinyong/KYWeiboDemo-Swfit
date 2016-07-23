@@ -117,6 +117,11 @@ class MainViewController: UITabBarController {
     // 按钮监听方法
     func composeBtnClick() {
         QL2("按钮监听")
+        // 1.创建导航控制器，添加根控制器
+        let vc = ComposeViewController()
+        let nv = UINavigationController(rootViewController: vc)
+        // 2.弹出发送控制器
+        self.presentViewController(nv, animated: true, completion: nil)
     }
     
     // MARK: - 懒加载
