@@ -9,6 +9,9 @@
 import UIKit
 
 class ComposeViewController: UIViewController {
+    
+    /// 工具条底部约束
+    private var toolbarBottomConstraint: NSLayoutConstraint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,16 +21,28 @@ class ComposeViewController: UIViewController {
         
         // 2.布局子控件
         setupConstraints()
+        
+        // 3.注册通知
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillChange(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
+        
+        // 4.将文本视图传递给toolbar
+        toolbar.textView = textView
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         textView.becomeFirstResponder()
     }
-    
+
     override func viewWillDisappear(animated: Bool) {
         textView.resignFirstResponder()
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+
     // MARK: - 内部控制方法
     func setupUI() {
         // 1.添加导航栏按钮
@@ -47,14 +62,24 @@ class ComposeViewController: UIViewController {
         self.view.addSubview(textView)
         textView.delegate = self
         
+        // 3.添加工具条
+        self.view.addSubview(toolbar)
+        
     }
     
     private func setupConstraints() {
         textView.translatesAutoresizingMaskIntoConstraints = false
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
         
+        // 文本视图布局
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[textView]-0-|", options: .DirectionMask, metrics: nil, views: ["textView": textView]))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[textView]-0-|", options: .DirectionMask, metrics: nil, views: ["textView": textView]))
         
+        // 工具条布局
+        toolbar.addConstraint(NSLayoutConstraint(item: toolbar, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 44.0))
+        toolbarBottomConstraint = NSLayoutConstraint(item: toolbar, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[toolbar]-0-|", options: .DirectionMask, metrics: nil, views: ["toolbar": toolbar]))
+        self.view.addConstraint(toolbarBottomConstraint!)
     }
     
     // 左侧导航按钮监听
@@ -77,12 +102,39 @@ class ComposeViewController: UIViewController {
         }
     }
     
+    // 通知中心键盘监听方法
+    @objc private func keyboardWillChange(notification: NSNotification) {
+        
+        // 1.获取弹出键盘的frame
+        let rect = notification.userInfo![UIKeyboardFrameEndUserInfoKey]!.CGRectValue
+        
+        // 2.获取屏幕的高度
+        let height = UIScreen.mainScreen().bounds.height
+        
+        // 3.计算需要移动的距离
+        let offsetY = rect.origin.y - height
+        
+        // 4.获取弹出键盘所需时间
+        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
+        
+        // 5.修改工具条底部约束
+        UIView.animateWithDuration(duration) {
+            self.toolbarBottomConstraint?.constant = offsetY
+            self.view.layoutIfNeeded()
+        }
+        
+    }
+    
     // MARK: - 懒加载
     private lazy var textView: UITextView = {
         let tv = JYTextView(frame: CGRectZero, textContainer: nil)
         tv.font = UIFont.systemFontOfSize(14)
-        
         return tv
+    }()
+    
+    private lazy var toolbar: ComposeToolbar = {
+        let tb = NSBundle.mainBundle().loadNibNamed("ComposeToolbar", owner: nil, options: nil).last as! ComposeToolbar
+        return tb
     }()
     
 }

@@ -22,6 +22,8 @@
 		4B2F1D121D43C513006FEBF8 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2F1D111D43C513006FEBF8 /* ComposeViewController.swift */; };
 		4B2F1D141D43C78A006FEBF8 /* JYTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2F1D131D43C78A006FEBF8 /* JYTitleView.swift */; };
 		4B2F1D161D43D7E1006FEBF8 /* JYTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2F1D151D43D7E1006FEBF8 /* JYTextView.swift */; };
+		4B2F1D181D449A2C006FEBF8 /* ComposeToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2F1D171D449A2C006FEBF8 /* ComposeToolbar.swift */; };
+		4B2F1D1A1D449B2B006FEBF8 /* ComposeToolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B2F1D191D449B2B006FEBF8 /* ComposeToolbar.xib */; };
 		DD5251531D1BCA5600B6CAF6 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5251521D1BCA5600B6CAF6 /* UserModel.swift */; };
 		DD5251561D1BE48400B6CAF6 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5251541D1BE48400B6CAF6 /* HomeTableViewCell.swift */; };
 		DD5251571D1BE48400B6CAF6 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD5251551D1BE48400B6CAF6 /* HomeTableViewCell.xib */; };
@@ -99,6 +101,8 @@
 		4B2F1D111D43C513006FEBF8 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ComposeViewController.swift; path = AYWeibo/classes/Home/ComposeViewController.swift; sourceTree = SOURCE_ROOT; };
 		4B2F1D131D43C78A006FEBF8 /* JYTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JYTitleView.swift; path = AYWeibo/classes/Home/JYTitleView.swift; sourceTree = SOURCE_ROOT; };
 		4B2F1D151D43D7E1006FEBF8 /* JYTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JYTextView.swift; path = AYWeibo/classes/Home/JYTextView.swift; sourceTree = SOURCE_ROOT; };
+		4B2F1D171D449A2C006FEBF8 /* ComposeToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ComposeToolbar.swift; path = AYWeibo/classes/Home/ComposeToolbar.swift; sourceTree = SOURCE_ROOT; };
+		4B2F1D191D449B2B006FEBF8 /* ComposeToolbar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ComposeToolbar.xib; path = AYWeibo/classes/Home/ComposeToolbar.xib; sourceTree = SOURCE_ROOT; };
 		BFD7938325764509CF28D412 /* Pods-AYWeibo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AYWeibo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AYWeibo/Pods-AYWeibo.debug.xcconfig"; sourceTree = "<group>"; };
 		DD5251521D1BCA5600B6CAF6 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		DD5251541D1BE48400B6CAF6 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -246,6 +250,8 @@
 				4B2F1D111D43C513006FEBF8 /* ComposeViewController.swift */,
 				4B2F1D131D43C78A006FEBF8 /* JYTitleView.swift */,
 				4B2F1D151D43D7E1006FEBF8 /* JYTextView.swift */,
+				4B2F1D171D449A2C006FEBF8 /* ComposeToolbar.swift */,
+				4B2F1D191D449B2B006FEBF8 /* ComposeToolbar.xib */,
 			);
 			path = Compose;
 			sourceTree = "<group>";
@@ -539,6 +545,7 @@
 				DDBDE9F61CFD813A00048845 /* MainVCSettings.json in Resources */,
 				DD699C9C1CEBADEE00E4704D /* Assets.xcassets in Resources */,
 				488566E31D26341500E6AFC8 /* ForwardTableViewCell.xib in Resources */,
+				4B2F1D1A1D449B2B006FEBF8 /* ComposeToolbar.xib in Resources */,
 				DD5251571D1BE48400B6CAF6 /* HomeTableViewCell.xib in Resources */,
 				DDB1ADC91D02D9F300AD1966 /* VisitorView.xib in Resources */,
 				488566E81D26755800E6AFC8 /* RefreshView.xib in Resources */,
@@ -616,6 +623,7 @@
 			files = (
 				DD7A62141D1992BE009427C1 /* WelcomeViewController.swift in Sources */,
 				DD5251621D1E414A00B6CAF6 /* RequestAccount.swift in Sources */,
+				4B2F1D181D449A2C006FEBF8 /* ComposeToolbar.swift in Sources */,
 				DD5251601D1DB4A500B6CAF6 /* StatuseViewModel.swift in Sources */,
 				DDD2910F1D0AFDF0003C31AA /* UITabBarItemExtension.swift in Sources */,
 				DDD291081D0A183A003C31AA /* PopoverViewController.swift in Sources */,

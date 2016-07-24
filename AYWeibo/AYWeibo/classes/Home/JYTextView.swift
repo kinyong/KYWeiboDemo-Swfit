@@ -24,6 +24,10 @@ class JYTextView: UITextView {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.resignFirstResponder()
+    }
+    
     // MARK: - 内部控制方法
     private func setupUI() {
         // 1.添加子控件
