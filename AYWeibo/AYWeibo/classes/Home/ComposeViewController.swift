@@ -27,6 +27,7 @@ class ComposeViewController: UIViewController {
         
         // 4.将文本视图传递给toolbar
         toolbar.textView = textView
+        toolbar.keyboardView = keyboardEmoticomViewController.view
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -64,6 +65,9 @@ class ComposeViewController: UIViewController {
         
         // 3.添加工具条
         self.view.addSubview(toolbar)
+        
+        // 4.添加表情键盘控制器
+        self.addChildViewController(keyboardEmoticomViewController)
         
     }
     
@@ -114,12 +118,15 @@ class ComposeViewController: UIViewController {
         // 3.计算需要移动的距离
         let offsetY = rect.origin.y - height
         
-        // 4.获取弹出键盘所需时间
+        // 4.获取弹出键盘的节奏
         let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
+        // 5.计算弹出键盘的持续时间
+        let curve = notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! Int
         
         // 5.修改工具条底部约束
         UIView.animateWithDuration(duration) {
             self.toolbarBottomConstraint?.constant = offsetY
+            UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: curve)!)
             self.view.layoutIfNeeded()
         }
         
@@ -136,6 +143,8 @@ class ComposeViewController: UIViewController {
         let tb = NSBundle.mainBundle().loadNibNamed("ComposeToolbar", owner: nil, options: nil).last as! ComposeToolbar
         return tb
     }()
+    
+    private lazy var keyboardEmoticomViewController: JYKeyboardEmoticonViewController = JYKeyboardEmoticonViewController()
     
 }
 

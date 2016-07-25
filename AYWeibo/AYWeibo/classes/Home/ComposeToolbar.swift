@@ -21,6 +21,9 @@ class ComposeToolbar: UIToolbar {
     /// 接受外界传入的textView
     var textView: UITextView?
     
+    /// 接受键盘视图
+    var keyboardView: UIView?
+    
     // MARK: - 内部控制方法
     
     func setupUI() {
@@ -46,7 +49,7 @@ class ComposeToolbar: UIToolbar {
             textView?.inputView = nil
         } else {
             // 切换为自定义键盘
-            textView?.inputView = UISwitch()
+            textView?.inputView = keyboardView
         }
         // 3.切换后打开键盘
         textView?.becomeFirstResponder()
